@@ -15,11 +15,11 @@ export default async function (req, res) {
     return;
   }
 
-  const vehicle = req.body.vehicle || '';
-  if (vehicle.trim().length === 0) {
+  const animal = req.body.animal || '';
+  if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Merci d'entrer un modèle de véhicule",
+        message: "Please enter a valid animal",
       }
     });
     return;
@@ -28,7 +28,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(vehicle),
+      prompt: generatePrompt(animal),
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -48,16 +48,15 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(vehicle) {
-  const capitalizedVehicle =
-  vehicle[0].toUpperCase() + vehicle.slice(1).toLowerCase();
-  return `Propose un modèle de véhicule écologique équivalent avec son prix en euros.
-Vehicle: BMW M3
-Names: Tesla Model 3 Performance prix:50000€
-Vehicle: Mercedes Classe S
-Names: Audi RS e-tron GT prix:200000€
-Vehicle: Porsche Panamera Turbo
-Names: Tesla Model S Ludicrous prix:120000€
-Vehicle: ${capitalizedVehicle}
+function generatePrompt(animal) {
+  const capitalizedAnimal =
+    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
+  return `Suggest three names for an animal that is a superhero.
+
+Animal: Cat
+Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
+Animal: Dog
+Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
+Animal: ${capitalizedAnimal}
 Names:`;
 }

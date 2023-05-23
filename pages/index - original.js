@@ -35,21 +35,21 @@ export default function Home() {
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/agilauto.png" />
+        <link rel="icon" href="/dog.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/agilauto.png" height="200" widgth="600" />
-        <h1>Votre nouveau véhicule green</h1>
+        <img src="/dog.png" className={styles.icon} />
+        <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="vehicle"
-            placeholder="Entrez le modèle de véhicule actuel"
+            placeholder="Entrez un modèle de véhicule"
             value={vehicleInput}
             onChange={(e) => setVehicleInput(e.target.value)}
           />
-          <input type="submit" value="Recherche" />
+          <input type="submit" value="Generate names" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>

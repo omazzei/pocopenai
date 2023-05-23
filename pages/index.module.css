@@ -36,6 +36,13 @@
   color: #202123;
   margin: 16px 0 40px;
 }
+.main h2 {
+  font-size: 20px;
+  line-height: 40px;
+  font-weight: bold;
+  color: #209e31;
+  margin: 16px 0 40px;
+}
 .main form {
   display: flex;
   flex-direction: column;
@@ -64,4 +71,5 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  color:rgb(8, 139, 8)
 }
