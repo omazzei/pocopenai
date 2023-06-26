@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [vehicleInput, setVehicleInput] = useState("");
+  const [radioNumSit, setRadioNumSit] = useState(4);
   const [checkedZFE, setCheckedZFE] = useState(false);
   const [checkedfrenchCar, setCheckedfrenchCar] = useState(false);
   const [result, setResult] = useState();
@@ -25,7 +26,7 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         // body: JSON.stringify({ vehicle: vehicleInput }),
-	      body: JSON.stringify({ vehicle: vehicleInput, checkedfrenchCar: checkedfrenchCar, checkedZFE: checkedZFE }),
+	      body: JSON.stringify({ vehicle: vehicleInput, checkedfrenchCar: checkedfrenchCar, checkedZFE: checkedZFE, numSit: radioNumSit }),
       });
 
       const data = await response.json();
@@ -45,7 +46,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>POC Agilauto OpenAI</title>
         <link rel="icon" href="/agilauto.png" />
       </Head>
 
@@ -60,19 +61,68 @@ export default function Home() {
             value={vehicleInput}
             onChange={(e) => setVehicleInput(e.target.value)}
           />
-        <h2>Compatible ZFE ?
-        <input type="Checkbox" 
-          label="Compatible ZFE ?"
-          value={checkedZFE}
-          onChange={handleChangeZFE}
-        /></h2>
-        <h2>Marque française ?
-        <input type="Checkbox"
-	  name="checkedfrenchCar"
-          label="Marque française ?"
-          value={checkedfrenchCar}
-          onChange={handleChangefrenchCar}
-        /></h2>           {}
+	  <div class="container">
+	  	<div class="typeVehicle">
+			<h2>
+	  			Compatible ZFE ?
+				<input type="Checkbox" 
+				  label="Compatible ZFE ?"
+				  value={checkedZFE}
+				  onChange={handleChangeZFE}
+				/>
+	  		</h2>
+			<h2>
+				  Marque française ?
+				<input type="Checkbox"
+				  name="checkedfrenchCar"
+				  label="Marque française ?"
+				  value={checkedfrenchCar}
+				  onChange={handleChangefrenchCar}
+				/>
+			</h2>           {}
+	  	</div>
+	  	<div class="techniqueFilter">
+			<h2>
+				Nombre de places souhaitées ?
+	  			<div>
+	  			<input type="radio"
+	  			  name="radioNumSit"
+	  			  value="2"
+				  onChange={(e) => setRadioNumSit(e.target.value), console.log(radioNumSit)}
+	  			  id="twoSit"/>
+				<label for="twoSit">Coupé 2 places</label>
+	  			</div>
+
+	  			<div>
+	  			<input type="radio"
+	  			  name="radioNumSit"
+	  			  value="4" 
+				  onChange={(e) => setRadioNumSit(e.target.value)}
+	  			  id="fourSit"/>
+				<label for="fourSit">4 places</label>
+	  			</div>
+
+	  			<div>
+	  			<input type="radio"
+	  			  name="radioNumSit"
+	  			  value="5"
+				  onChange={(e) => setRadioNumSit(e.target.value)}
+	  			  id="sixSit"/>
+				<label for="sixSit">5 places</label>
+	  			</div>
+
+	  			<div>
+	  			<input type="radio"
+	  			  name="radioNumSit"
+	  			  value="7"
+				  onChange={(e) => setRadioNumSit(e.target.value)}
+	  			  id="eightSit"/>
+				<label for="eightSit">7 places</label>
+	  			</div>
+	  			
+	  		</h2>
+	  	</div>
+	  </div>
 
           <input type="submit" value="Recherche" />
         </form>

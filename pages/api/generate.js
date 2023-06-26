@@ -27,6 +27,7 @@ export default async function (req, res) {
 
   const french = req.body.checkedfrenchCar;
   const zfecompat = req.body.checkedZFE;
+  const nbsieges = req.body.numSit;
   console.log(`Valeur french : ${french}`);
   console.log(`Valeur req.body.checkedfrenchCar: `, req.body.checkedfrenchCar);
   console.log(`Valeur req.body : `,req.body); 
@@ -34,9 +35,10 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(vehicle, french, zfecompat),
-      temperature: 0.2,
+      prompt: generatePrompt(vehicle, french, zfecompat,nbsieges),
+      temperature: 0.5,
     });
+    console.log(`completion : ${completion}`);
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
@@ -54,28 +56,43 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(vehicle, french, zfecompat ) {
+function generatePrompt(vehicle, french, zfecompat, numSit) {
   const capitalizedVehicle =
   vehicle[0].toUpperCase() + vehicle.slice(1).toLowerCase();
   var isFrench = '';
   var isZFE = '';
+  var nbPlace = 5;
   var prompt = '';
 
   if (french) {
 	  isFrench = ' de marque française ';}
   if (zfecompat) {
 	  isZFE = ' autorisé à rouler dans une zone à faible émission ';}
+  nbPlace = numSit; 
 
-prompt = `Propose un modèle de véhicule écologique ${isFrench} ${isZFE} avec son prix en euros.
+// v1
+//prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son prix en euros.
+//Vehicle: BMW M3
+//Names: 508 Peugeot Sport Engineered prix:72000€
+//Vehicle: Mercedes Classe S
+//Names: Citroen DS9 prix:65000€
+//Vehicle: Alfa Romeo 147 
+//Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE prix:43000€
+//Vehicle: ${capitalizedVehicle}
+//Names:`;
+
+// v2
+prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation et son prix en euros.
 Vehicle: BMW M3
-Names: 508 Peugeot Sport Engineered prix:72000€
+Names: 508 Peugeot Sport Engineered \nmotorisation:hybride essence \nprix:72000€
 Vehicle: Mercedes Classe S
-Names: Citroen DS9 prix:65000€
+Names: Citroen DS9 \nmotorisation:hybride diesel \nprix:65000€
 Vehicle: Alfa Romeo 147 
-Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE prix:43000€
+Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE \nmotorisation:hybride \nprix:43000€
 Vehicle: ${capitalizedVehicle}
 Names:`;
-  console.log('Prompt:', prompt);  
+
+console.log('Prompt généré:', prompt);  
   
   return prompt;
 }
