@@ -36,10 +36,19 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(vehicle, french, zfecompat,nbsieges),
-      temperature: 0.5,
+      max_tokens:500,
+      temperature: 0.5
     });
-    console.log(`completion : ${completion}`);
+    //console.log(`########################`);
+    //console.log(`# Requete completion : #`);
+    //console.log(`########################`);
+    //console.log(completion);
+
     res.status(200).json({ result: completion.data.choices[0].text });
+    //console.log(`########################`);
+    //console.log(`# Requete res :        #`);
+    //console.log(`########################`);
+    //console.log(res);
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -82,15 +91,18 @@ function generatePrompt(vehicle, french, zfecompat, numSit) {
 //Names:`;
 
 // v2
-prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation et son prix en euros.
-Vehicle: BMW M3
-Names: 508 Peugeot Sport Engineered \nmotorisation:hybride essence \nprix:72000€
-Vehicle: Mercedes Classe S
-Names: Citroen DS9 \nmotorisation:hybride diesel \nprix:65000€
-Vehicle: Alfa Romeo 147 
-Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE \nmotorisation:hybride \nprix:43000€
-Vehicle: ${capitalizedVehicle}
-Names:`;
+//prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation et son prix en euros.
+//Vehicle: BMW M3
+//Names: 508 Peugeot Sport Engineered \nmotorisation:hybride essence \nprix:72000€
+//Vehicle: Mercedes Classe S
+//Names: Citroen DS9 \nmotorisation:hybride diesel \nprix:65000€
+//Vehicle: Alfa Romeo 147 
+//Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE \nmotorisation:hybride \nprix:43000€
+//Vehicle: ${capitalizedVehicle}
+//Names:`;
+
+// v3
+prompt = `Propose un modèle de véhicule écologique équivalent à ${capitalizedVehicle} avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation, son autonomie générale et son autonomie WLTP. Indique son gabarit et le volume du coffre ainsi que son tarif d'entrée de gamme en euros.`
 
 console.log('Prompt généré:', prompt);  
   
