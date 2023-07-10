@@ -120,7 +120,7 @@ MyBootstrapComponent();
 								<input type="radio"
 								  name="radioNumSit"
 								  value="2"
-								  onChange={(e) => setRadioNumSit(e.target.value), console.log(radioNumSit)}
+								  onChange={(e) => setRadioNumSit(e.target.value)}
 	  							  class="form-check-input"
 								  id="twoSit"/>
 								<label for="twoSit">Coupé 2 places</label>
