@@ -57,7 +57,7 @@ export default function Home() {
           <input
             type="text"
             name="vehicle"
-            placeholder="Entrez le modèle de véhicule actuel"
+            placeholder="Entrez le modèle de véhicule actuel :"
             value={vehicleInput}
             onChange={(e) => setVehicleInput(e.target.value)}
           />
