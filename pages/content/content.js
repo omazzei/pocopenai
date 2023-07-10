@@ -10,6 +10,7 @@ const Content = () => {
   const [checkedZFE, setCheckedZFE] = useState(false);
   const [checkedfrenchCar, setCheckedfrenchCar] = useState(false);
   const [result, setResult] = useState();
+  element.style.setProperty("--bs-accordion-active-bg","#006a4e");
 
   const handleChangeZFE = () => {
     setCheckedZFE(!checkedZFE);
