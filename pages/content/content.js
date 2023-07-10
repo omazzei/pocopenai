@@ -82,7 +82,7 @@ MyBootstrapComponent();
 		<div class="accordion-item">
 			<h2 class="accordion-header">
 			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-			Filtre
+			Critères
 			</button>
 			</h2>
 			<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
@@ -91,30 +91,30 @@ MyBootstrapComponent();
 						<div className={styles.typeVehicle}>
 	  					<div>
 							<input type="Checkbox" 
-							  label="Compatible ZFE ?"
+							  label="Compatible ZFE"
 							  value={checkedZFE}
 							  onChange={handleChangeZFE}
 	  						  class="form-check-input"
 							/>
 	  						<label class="form-check-label" for="zde">
-							Compatible ZFE ?
+							Compatible ZFE
 	  						</label>
 	  					</div>
 	  					<div>
 							<input type="Checkbox"
 							  name="checkedfrenchCar"
-							  label="Marque française ?"
+							  label="Marque française"
 							  value={checkedfrenchCar}
 							  onChange={handleChangefrenchCar}
 							  class="form-check-input"
 							/>
 	  						<label class="form-check-label" for="marqueFrancaise">
-							Marque française ?
+							Marque française
 	  						</label>
 						</div>
 							           {}
 						</div>
-							<label for="placeInput" class="form-label">Nombre de places souhaitées ?</label>
+							<label for="placeInput" class="form-label">Nombre de places souhaitées :</label>
 							<div className={styles.techniqueFilter}>
 								<div>
 								<input type="radio"
