@@ -27,7 +27,6 @@ export default async function (req, res) {
 
   const french = req.body.checkedfrenchCar;
   const zfecompat = req.body.checkedZFE;
-  const nbsieges = req.body.numSit;
   console.log(`Valeur french : ${french}`);
   console.log(`Valeur req.body.checkedfrenchCar: `, req.body.checkedfrenchCar);
   console.log(`Valeur req.body : `,req.body); 
@@ -35,20 +34,10 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(vehicle, french, zfecompat,nbsieges),
-      max_tokens:500,
-      temperature: 0.5
+      prompt: generatePrompt(vehicle, french, zfecompat),
+      temperature: 0.2,
     });
-    //console.log(`########################`);
-    //console.log(`# Requete completion : #`);
-    //console.log(`########################`);
-    //console.log(completion);
-
     res.status(200).json({ result: completion.data.choices[0].text });
-    //console.log(`########################`);
-    //console.log(`# Requete res :        #`);
-    //console.log(`########################`);
-    //console.log(res);
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -70,41 +59,26 @@ function generatePrompt(vehicle, french, zfecompat, numSit) {
   vehicle[0].toUpperCase() + vehicle.slice(1).toLowerCase();
   var isFrench = '';
   var isZFE = '';
-  var nbPlace = 5;
+  var isPlace = 4;
   var prompt = '';
 
   if (french) {
 	  isFrench = ' de marque française ';}
   if (zfecompat) {
 	  isZFE = ' autorisé à rouler dans une zone à faible émission ';}
-  nbPlace = numSit; 
+  if (numSit) {
+	  isPlace = numSit; }
 
-// v1
-//prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son prix en euros.
-//Vehicle: BMW M3
-//Names: 508 Peugeot Sport Engineered prix:72000€
-//Vehicle: Mercedes Classe S
-//Names: Citroen DS9 prix:65000€
-//Vehicle: Alfa Romeo 147 
-//Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE prix:43000€
-//Vehicle: ${capitalizedVehicle}
-//Names:`;
-
-// v2
-//prompt = `Propose un modèle de véhicule écologique avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation et son prix en euros.
-//Vehicle: BMW M3
-//Names: 508 Peugeot Sport Engineered \nmotorisation:hybride essence \nprix:72000€
-//Vehicle: Mercedes Classe S
-//Names: Citroen DS9 \nmotorisation:hybride diesel \nprix:65000€
-//Vehicle: Alfa Romeo 147 
-//Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE \nmotorisation:hybride \nprix:43000€
-//Vehicle: ${capitalizedVehicle}
-//Names:`;
-
-// v3
-prompt = `Propose un modèle de véhicule écologique équivalent à ${capitalizedVehicle} avec ${nbPlace} places ${isFrench} ${isZFE} avec son type de motorisation, son autonomie générale et son autonomie WLTP. Indique son gabarit et le volume du coffre ainsi que son tarif d'entrée de gamme en euros.`
-
-console.log('Prompt généré:', prompt);  
+prompt = `Propose un modèle de véhicule écologique avec ${isPlace} sièges ${isFrench} ${isZFE} avec son prix en euros.
+Vehicle: BMW M3
+Names: 508 Peugeot Sport Engineered prix:72000€
+Vehicle: Mercedes Classe S
+Names: Citroen DS9 prix:65000€
+Vehicle: Alfa Romeo 147 
+Names: Peugeot 308 SW PHEV 180 E-EAT8 ALLURE prix:43000€
+Vehicle: ${capitalizedVehicle}
+Names:`;
+  console.log('Prompt:', prompt);  
   
   return prompt;
 }
