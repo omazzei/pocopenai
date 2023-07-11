@@ -60,16 +60,16 @@ export default async function (req, res) {
      Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
    });
-    //console.log(`########################`);
-    //console.log(`# Requete completion : #`);
-    //console.log(`########################`);
-    //console.log(completion);
+    console.log(`########################`);
+    console.log(`# Requete completion : #`);
+    console.log(`########################`);
+    console.log(completion);
 
     res.status(200).json({ result: completion.data.choices[0].message });
-    //console.log(`########################`);
-    //console.log(`# Requete res :        #`);
-    //console.log(`########################`);
-    //console.log(res);
+    console.log(`########################`);
+    console.log(`# Requete res :        #`);
+    console.log(`########################`);
+    console.log(res);
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
