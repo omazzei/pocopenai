@@ -48,6 +48,7 @@ export default async function (req, res) {
     isZfe = "Oui"
    const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
    autorisé à rouler dans une zone à faible émission : ${isZfe}`;
+   /*
    const completion = await openai.createChatCompletion({
     model: "gpt-4",
     message: [{"role": "system", "content": `En tant qu'IA spécialisée dans la recommandation de véhicules écologiques,
@@ -59,6 +60,11 @@ export default async function (req, res) {
      comme le nombre de places ou si l'option doit être incluse ou non dans le choix final du véhicule écologique. 
      Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
+   });
+   */
+  const completion = await openai.createChatCompletion({
+    model: "gpt-4",
+    message: [{"role": "system", "content": "Tu es une IA gentille"}, {role: "user", content: "Salut!"}],
    });
     console.log(`########################`);
     console.log(`# Requete completion : #`);
