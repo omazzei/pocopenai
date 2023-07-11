@@ -33,18 +33,39 @@ export default async function (req, res) {
   console.log(`Valeur req.body : `,req.body); 
 
   try {
+    /*
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(vehicle, french, zfecompat,nbsieges),
       max_tokens:500,
       temperature: 0.5
     });
+    */
+   let isFrench = "Non", isZfe = "Non";
+   if (french)
+    isFrench = "Oui"
+   if (zfecompat )
+    isZfe = "Oui"
+   const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
+   autorisé à rouler dans une zone à faible émission : ${isZfe}`;
+   const completion = await openai.createChatCompletion({
+    model: "gpt-4",
+    message: [{"role": "system", "content": `En tant qu'IA spécialisée dans la recommandation de véhicules écologiques,
+     je suis capable de proposer un modèle de voiture respectant les critères spécifiques fournis par l'utilisateur. 
+     Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
+     ainsi qu'un budget d'entrée de gamme en euros. L'utilisateur devra fournir sa réponse sous la forme suivante : 
+     \"Modèle : [nom du modèle], nombre de places : [nombre], option 3 : [oui/non], etc.\" 
+     Il est possible que certaines options nécessitent une valeur numérique, 
+     comme le nombre de places ou si l'option doit être incluse ou non dans le choix final du véhicule écologique. 
+     Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
+     {role: "user", content: contentUserPrompt}],
+   });
     //console.log(`########################`);
     //console.log(`# Requete completion : #`);
     //console.log(`########################`);
     //console.log(completion);
 
-    res.status(200).json({ result: completion.data.choices[0].text });
+    res.status(200).json({ result: completion.data.choices[0].message });
     //console.log(`########################`);
     //console.log(`# Requete res :        #`);
     //console.log(`########################`);
