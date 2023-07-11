@@ -10,7 +10,6 @@ const Content = () => {
   const [checkedZFE, setCheckedZFE] = useState(false);
   const [checkedfrenchCar, setCheckedfrenchCar] = useState(false);
   const [result, setResult] = useState();
-  element.style.setProperty("--bs-accordion-active-bg","#006a4e");
 
   const handleChangeZFE = () => {
     setCheckedZFE(!checkedZFE);
@@ -82,7 +81,7 @@ MyBootstrapComponent();
 	<div class="accordion" id="accordionPanelsStayOpenExample">
 		<div class="accordion-item">
 			<h2 class="accordion-header">
-			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+			<button className={styles.accordion} class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
 			Critères
 			</button>
 			</h2>
