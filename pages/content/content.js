@@ -6,7 +6,7 @@ import Reponse from '../reponse/reponse.js';
 
 const Content = () => {
   const [vehicleInput, setVehicleInput] = useState("");
-  const [radioNumSit, setRadioNumSit] = useState(4);
+  const [radioNumSit, setRadioNumSit] = useState(5);
   const [checkedZFE, setCheckedZFE] = useState(false);
   const [checkedfrenchCar, setCheckedfrenchCar] = useState(false);
   const [result, setResult] = useState();
@@ -120,7 +120,7 @@ MyBootstrapComponent();
 								<input type="radio"
 								  name="radioNumSit"
 								  value="2"
-								  onChange={(e) => setRadioNumSit(e.target.value)}
+								  onChange={(e) => setRadioNumSit(2)}
 	  							  class="form-check-input"
 								  id="twoSit"/>
 								<label for="twoSit">Coupé 2 places</label>
@@ -129,18 +129,8 @@ MyBootstrapComponent();
 								<div>
 								<input type="radio"
 								  name="radioNumSit"
-								  value="4" 
-								  onChange={(e) => setRadioNumSit(e.target.value)}
-	  							  class="form-check-input"
-								  id="fourSit"/>
-								<label for="fourSit">4 places</label>
-								</div>
-
-								<div>
-								<input type="radio"
-								  name="radioNumSit"
 								  value="5"
-								  onChange={(e) => setRadioNumSit(e.target.value)}
+								  onChange={(e) => setRadioNumSit(5)}
 	  							  class="form-check-input"
 								  id="sixSit"/>
 								<label for="sixSit">5 places</label>
@@ -150,7 +140,7 @@ MyBootstrapComponent();
 								<input type="radio"
 								  name="radioNumSit"
 								  value="7"
-								  onChange={(e) => setRadioNumSit(e.target.value)}
+								  onChange={(e) => setRadioNumSit(7)}
 	  							  class="form-check-input"
 								  id="eightSit"/>
 								<label for="eightSit">7 places</label>
