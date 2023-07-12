@@ -48,16 +48,17 @@ export default async function (req, res) {
     isZfe = "Oui"
    const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
    autorisé à rouler dans une zone à faible émission : ${isZfe}`;
-  
+  //Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
+  //ainsi qu'un budget d'entrée de gamme en euros.
    const completion = await openai.createChatCompletion({
     model: "gpt-4",
-    messages: [{"role": "system", "content": `En tant qu'IA spécialisée dans la recommandation de véhicules écologiques,
-     je suis capable de proposer un modèle de voiture respectant les critères spécifiques fournis par l'utilisateur. 
-     Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
-     ainsi qu'un budget d'entrée de gamme en euros. L'utilisateur devra fournir sa réponse sous la forme suivante : 
+    messages: [{"role": "system", "content": `Tu es GPT-ECO-VEHICULE, une IA spécialisée dans la recommandation de véhicules écologiques,
+     Quand l'utilisateur t'envoi un modèle de véhicule tu lui recommandes un véhicule écologique équivalent. 
+     L'utilisateur va te fournir sa réponse sous la forme suivante : 
      \"Modèle : [nom du modèle], nombre de places : [nombre], option 3 : [oui/non], etc.\" 
      Il est possible que certaines options nécessitent une valeur numérique, 
      comme le nombre de places ou si l'option doit être incluse ou non dans le choix final du véhicule écologique. 
+     A toi de recommander un véhicule équivalent qui comporte les options entrer.
      Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
    });
