@@ -43,9 +43,9 @@ export default async function (req, res) {
     */
    let isFrench = "Non", isZfe = "Non";
    if (french)
-    isFrench = "Oui"
+    isFrench = "Pas important"
    if (zfecompat )
-    isZfe = "Oui"
+    isZfe = "Pas important"
    const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
    autorisé à rouler dans une zone à faible émission : ${isZfe}`;
   //Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
