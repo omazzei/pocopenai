@@ -51,6 +51,11 @@
   outline-color: #10a37f;
   width:320px;
 }
+.main .selectContainer {
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  width:320px;
+}
 .main ::placeholder {
   color: #8e8ea0;
   opacity: 1;

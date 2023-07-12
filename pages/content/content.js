@@ -81,11 +81,13 @@ MyBootstrapComponent();
             onChange={(e) => setVehicleInput(e.target.value)}
           />
 
+	<div className="selectContainer">
 		<select class="form-select" aria-label="Default select example" onChange={handleSelectChangeGpt}>
-  		  <option selected>Selectionner le modèle de langage</option>
-   		  <option value="gpt-3.5-turbo">GPT 3.5 turbo</option>
-   		  <option value="gpt-4">GPT 4</option>
+  		  <option selected>Selectionner un modèle de langage</option>
+   		  <option value="gpt-3.5-turbo">gpt 3.5 turbo</option>
+   		  <option value="gpt-4">gpt 4</option>
 		</select>
+	</div>
 
 <div className={styles.containerFilter}>
 	<div class="accordion" id="accordionPanelsStayOpenExample">
