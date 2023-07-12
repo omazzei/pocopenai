@@ -52,7 +52,7 @@ MyBootstrapComponent();
           "Content-Type": "application/json",
         },
         // body: JSON.stringify({ vehicle: vehicleInput }),
-	      body: JSON.stringify({ vehicle: vehicleInput, checkedfrenchCar: checkedfrenchCar, checkedZFE: checkedZFE, numSit: radioNumSit }),
+	      body: JSON.stringify({ vehicle: vehicleInput, checkedfrenchCar: checkedfrenchCar, checkedZFE: checkedZFE, numSit: radioNumSit, gpt: gpt }),
       });
 
       const data = await response.json();
