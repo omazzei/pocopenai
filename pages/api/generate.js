@@ -56,8 +56,6 @@ export default async function (req, res) {
      Quand l'utilisateur t'envoi un modèle de véhicule tu lui recommandes un véhicule écologique équivalent. 
      L'utilisateur va te fournir sa réponse sous la forme suivante : 
      \"Modèle : [nom du modèle], nombre de places : [nombre], option 3 : [oui/non], etc.\" 
-     Il est possible que certaines options nécessitent une valeur numérique, 
-     comme le nombre de places ou si l'option doit être incluse ou non dans le choix final du véhicule écologique. 
      A toi de recommander un véhicule équivalent qui comporte les options entrer.
      Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
