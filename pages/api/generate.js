@@ -48,10 +48,10 @@ export default async function (req, res) {
     isZfe = "Oui"
    const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
    autorisé à rouler dans une zone à faible émission : ${isZfe}`;
-   /*
+  
    const completion = await openai.createChatCompletion({
     model: "gpt-4",
-    message: [{"role": "system", "content": `En tant qu'IA spécialisée dans la recommandation de véhicules écologiques,
+    messages: [{"role": "system", "content": `En tant qu'IA spécialisée dans la recommandation de véhicules écologiques,
      je suis capable de proposer un modèle de voiture respectant les critères spécifiques fournis par l'utilisateur. 
      Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
      ainsi qu'un budget d'entrée de gamme en euros. L'utilisateur devra fournir sa réponse sous la forme suivante : 
@@ -61,21 +61,19 @@ export default async function (req, res) {
      Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
    });
-   */
-  const completion = await openai.createChatCompletion({
-    model: "gpt-4",
-    message: [{"role": "system", "content": "Tu es une IA gentille"}, {role: "user", content: "Salut!"}],
-   });
+   
+    res.status(200).json({ result: completion.data.choices[0].message.content });
+	  /*
     console.log(`########################`);
     console.log(`# Requete completion : #`);
     console.log(`########################`);
     console.log(completion);
 
-    res.status(200).json({ result: completion.data.choices[0].message });
     console.log(`########################`);
     console.log(`# Requete res :        #`);
     console.log(`########################`);
     console.log(res);
+	  */
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
