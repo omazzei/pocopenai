@@ -10,6 +10,7 @@ const Content = () => {
   const [checkedZFE, setCheckedZFE] = useState(false);
   const [checkedfrenchCar, setCheckedfrenchCar] = useState(false);
   const [result, setResult] = useState();
+  const [gpt, setGpt] = useState("gpt-3.5-turbo");
 
   const handleChangeZFE = () => {
     setCheckedZFE(!checkedZFE);
@@ -19,6 +20,9 @@ const Content = () => {
     setCheckedfrenchCar(!checkedfrenchCar);
   };
 
+  function handleSelectChangeGpt(event) {
+    setGpt(event.target.value);
+  }
 
 function MyBootstrapComponent() {
 	useEffect(() => {
@@ -76,6 +80,12 @@ MyBootstrapComponent();
             value={vehicleInput}
             onChange={(e) => setVehicleInput(e.target.value)}
           />
+
+		<select class="form-select" aria-label="Default select example" onChange={handleSelectChangeGpt}>
+  		  <option selected>Selectionner le modèle de langage</option>
+   		  <option value="gpt-3.5-turbo">GPT 3.5 turbo</option>
+   		  <option value="gpt-4">GPT 4</option>
+		</select>
 
 <div className={styles.containerFilter}>
 	<div class="accordion" id="accordionPanelsStayOpenExample">

@@ -28,6 +28,7 @@ export default async function (req, res) {
   const french = req.body.checkedfrenchCar;
   const zfecompat = req.body.checkedZFE;
   const nbsieges = req.body.numSit;
+  const gpt = req.body.gpt;
   console.log(`Valeur french : ${french}`);
   console.log(`Valeur req.body.checkedfrenchCar: `, req.body.checkedfrenchCar);
   console.log(`Valeur req.body : `,req.body); 
@@ -51,8 +52,8 @@ export default async function (req, res) {
   //Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
   //ainsi qu'un budget d'entrée de gamme en euros.
    const completion = await openai.createChatCompletion({
-    model: "gpt-4",
-    messages: [{"role": "system", "content": `Tu es GPT-ECO-VEHICULE, une IA spécialisée dans la recommandation de véhicules écologiques,
+    model: gpt,
+    messages: [{"role": "system", "content": `Tu es ECO-VEHICULE-GPT, une IA spécialisée dans la recommandation de véhicules écologiques,
      Quand l'utilisateur t'envoi un modèle de véhicule tu lui recommandes un véhicule écologique équivalent. 
      L'utilisateur va te fournir sa réponse sous la forme suivante : 
      \"Modèle : [nom du modèle], nombre de places : [nombre], option 3 : [oui/non], etc.\" 
