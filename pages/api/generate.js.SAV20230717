@@ -29,9 +29,8 @@ export default async function (req, res) {
   const zfecompat = req.body.checkedZFE;
   const nbsieges = req.body.numSit;
   const gpt = req.body.gpt;
-  const motor = req.body.motor;
-  //console.log(`Valeur french : ${french}`);
-  //console.log(`Valeur req.body.checkedfrenchCar: `, req.body.checkedfrenchCar);
+  console.log(`Valeur french : ${french}`);
+  console.log(`Valeur req.body.checkedfrenchCar: `, req.body.checkedfrenchCar);
   console.log(`Valeur req.body : `,req.body); 
 
   try {
@@ -43,25 +42,23 @@ export default async function (req, res) {
       temperature: 0.5
     });
     */
-   //let isFrench = "Pas important", isZfe = "Pas important";
-   let isFrench = "Non obligatoire", isZfe = "Non obligatoire";
+   let isFrench = "Pas important", isZfe = "Pas important";
    if (french)
-    isFrench = "Oui";
+    isFrench = "Oui"
    if (zfecompat )
-    isZfe = "Oui";
-   const contentUserPrompt = `Modèle : ${vehicle }, motorisation préférentiel du nouveau véhicule : ${motor}, nombre de places souhaité pour le nouveau véhicule : ${nbsieges}, nouveau véhicule de marque française : ${isFrench}, nouveau véhicule autorisé à rouler dans une zone à faible émission : ${isZfe}`;
+    isZfe = "Oui"
+   const contentUserPrompt = `Modèle : ${vehicle }, nombre de places : ${nbsieges}, marque française : ${isFrench}, 
+   autorisé à rouler dans une zone à faible émission : ${isZfe}`;
   //Ces critères incluent des normes de faible émission de CO2, une motorisation écologique, une autonomie générale et une autonomie WLTP, 
   //ainsi qu'un budget d'entrée de gamme en euros.
    const completion = await openai.createChatCompletion({
     model: gpt,
-    messages: [{"role": "system", "content": `Tu es ECO-VEHICULE-GPT, une IA spécialisée dans la recommandation de véhicules propres,
-     Quand l'utilisateur t'envoie son modèle actuel de véhicule et les caractéristiques qu'il souhaite retrouver dans son futur véhicule, tu lui recommandes un véhicule écologique équivalent en lui donnant des détails sur le tarif, la motorisation, l'autonomie, la taille du véhicule et du coffre, etc. 
-     L'utilisateur va formuler la demande sous la forme d'une liste de clés : valeurs comme par exemple ce qui suit : 
-     \"Modèle : [nom du modèle actuel], nombre de places souhaitées : [nombre], marque française : [oui/non obligatoire], autorisé à rouler dans une zone à faible émission : [oui/non obligatoire], etc.\" 
-     A toi de recommander un véhicule propre équivalent en tenant compte des caractéristiques données.
-     Tu préciseras s'il s'agit d'une motorisation hybride ou hybride rechargeable ou 100% électrique.
-     Si l'utilisateur fait une demande qui ne correspond pas à un modèle de voiture , un message d'erreur sera renvoyé.
-     Si l'utilisateur fait une demande qui correpond uniquement à une marque de constructeur de véhicule , tu lui demanderas poliment d'être plus précis `}, 
+    messages: [{"role": "system", "content": `Tu es ECO-VEHICULE-GPT, une IA spécialisée dans la recommandation de véhicules écologiques,
+     Quand l'utilisateur t'envoie cun modèle de véhicule tu lui recommandes un véhicule écologique équivalent. 
+     L'utilisateur va te fournir sa réponse sous la forme suivante : 
+     \"Modèle : [nom du modèle], nombre de places : [nombre], option 3 : [oui/non], etc.\" 
+     A toi de recommander un véhicule équivalent qui comporte les options entrer.
+     Si l'utilisateur fournit une réponse qui ne correspond pas à un modèle de voiture, un message d'erreur sera renvoyé.`}, 
      {role: "user", content: contentUserPrompt}],
    });
    
