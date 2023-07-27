@@ -73,11 +73,11 @@ MyBootstrapComponent();
   return (
       <main className={styles.main}>
 	  <Header />
-        <form onSubmit={onSubmit} id="formVehicle">
+        <form onSubmit={onSubmit} id="formVehicle" autocomplete="off">
           <input
             type="text"
             name="vehicle"
-            placeholder="Entrez le modèle de véhicule actuel"
+            placeholder="Votre modèle actuel? (Ford Fiesta 2018)"
             value={vehicleInput}
             onChange={(e) => setVehicleInput(e.target.value)}
           />
@@ -95,7 +95,7 @@ MyBootstrapComponent();
 		<div class="accordion-item">
 			<h2 class="accordion-header">
 			<button className={styles.accordion} class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-			Critères
+			Critères du véhicule recherché
 			</button>
 			</h2>
 			<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
@@ -110,7 +110,7 @@ MyBootstrapComponent();
 	  						  class="form-check-input"
 							/>
 	  						<label class="form-check-label" for="zde">
-							Compatible ZFE
+							  véhicule compatible avec les zones à faibles émissions
 	  						</label>
 	  					</div>
 	  					<div>
@@ -127,17 +127,16 @@ MyBootstrapComponent();
 						</div>
 							           {}
 						</div>
-							<label for="motorInput" class="form-label">Préférence de motorisation :</label>
+							<label for="motorInput" class="form-label">Type de motorisation souhaité :</label>
 							<div className={styles.techniqueFilter}>
 								<div>
 								<input type="radio"
 								  name="radioMotor"
 								  value="électrique"
-	  							  checked="checked"
 								  onChange={(e) => setRadioMotor("électrique")}
 	  							  class="form-check-input"
 								  id="electrique"/>
-								<label for="electrique">Motorisation électrique</label>
+								<label for="electrique">Véhicule électrique</label>
 								</div>
 								<div>
 								<input type="radio"
@@ -146,7 +145,7 @@ MyBootstrapComponent();
 								  onChange={(e) => setRadioMotor("hybride")}
 	  							  class="form-check-input"
 								  id="hybride"/>
-								<label for="hybride">Motorisation hybride</label>
+								<label for="hybride">Véhicule  hybride</label>
 								</div>
 								<div>
 								<input type="radio"
@@ -155,10 +154,10 @@ MyBootstrapComponent();
 								  onChange={(e) => setRadioMotor("hybride rechargeable")}
 	  							  class="form-check-input"
 								  id="hybriderech"/>
-								<label for="hybriderech">Motorisation hybride rechargeable</label>
+								<label for="hybriderech">Véhicule hybride rechargeable</label>
 								</div>
 							</div>
-							<label for="placeInput" class="form-label">Nombre de places souhaitées :</label>
+							<label for="placeInput" class="form-label">Nombre de places nécessaires :</label>
 							<div className={styles.techniqueFilter}>
 								<div>
 								<input type="radio"
@@ -167,7 +166,7 @@ MyBootstrapComponent();
 								  onChange={(e) => setRadioNumSit(2)}
 	  							  class="form-check-input"
 								  id="twoSit"/>
-								<label for="twoSit">Coupé 2 places</label>
+								<label for="twoSit">2 places</label>
 								</div>
 								<div>
 								<input type="radio"
