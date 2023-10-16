@@ -47,6 +47,9 @@ MyBootstrapComponent();
   async function onSubmit(event) {
     event.preventDefault();
     try {
+		const loadingElement = document.getElementById("loading");
+		loadingElement.style.display = "block"; // Afficher le loading
+
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -55,6 +58,8 @@ MyBootstrapComponent();
         // body: JSON.stringify({ vehicle: vehicleInput }),
 	      body: JSON.stringify({ vehicle: vehicleInput, checkedfrenchCar: checkedfrenchCar, checkedZFE: checkedZFE, numSit: radioNumSit, motor: radioMotor, gpt: gpt }),
       });
+
+	  loadingElement.style.display = "none"; // Masquer le loading
 
       const data = await response.json();
       if (response.status !== 200) {	    
@@ -195,6 +200,7 @@ MyBootstrapComponent();
 </div>
 
           <input type="submit" value="Recherche" className={styles.recherche} />
+		  <div id="loading" style={{ display: 'none' }}>Loading...</div>
         </form>
 	  <Reponse result={result} />
       </main>
